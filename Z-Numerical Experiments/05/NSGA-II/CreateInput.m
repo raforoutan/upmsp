@@ -1,38 +1,42 @@
 function Input=CreateInput
 
-alpha={1
-       1
-       1
-       [1,2]
-       [1,2]
-       [1,2,3]
-       [2,3]
-       [2,3]
-       3};   %Machine eligibility
+alpha={[1,2,3]
+[1,2]
+[1,2,3,4]
+[1,2,3,4]
+[1,2,3]
+[2,3]
+[1,2,3]
+[3,4]
+[1,2,3,4]
+[1,2,3,4]};   %Machine eligibility
 
-lambda1=[1 0
-         1 0
-         1 0
-         0 0
-         0 0
-         0 0
-         0 1
-         0 1
-         0 0];   %Membership of a batch
+lambda1=[0	1
+0	0
+0	0
+0	0
+1	0
+1	0
+0	0
+0	1
+0	0
+0	0];   %Membership of a batch
     
-lambda2=[0
-         0
-         0
-         1
-         1
-         1
-         0
-         0
-         0];   %Membership of a job family 
+lambda2=[0	0
+0	1
+0	1
+1	0
+0	0
+0	0
+1	0
+0	0
+0	0
+0	0];   %Membership of a job family 
      
-beta= [1 1.5 2 1 2 1.5 1.5 1 1
-       2 2 1 1 1 1 1.5 1 1    
-       1 2 1.5 1.5 2 2 1 2 1];   %Speed of machines for each job  
+beta= [2	1.50000000000000	1	1	1	1	1.50000000000000	1.50000000000000	1.50000000000000	2
+1.50000000000000	2	1.50000000000000	2	1	2	1	2	2	1
+1	1	2	2	1.50000000000000	2	2	1	1.50000000000000	1.50000000000000
+2	1	1.50000000000000	1.50000000000000	1.50000000000000	2	1	2	1.50000000000000	1];   %Speed of machines for each job  
 
 I=numel(beta(:,1));   %Number of machines
 J=numel(beta(1,:));   %Number of jobs
@@ -40,20 +44,21 @@ B=numel(lambda1(1,:));   %Number of batches
 F=numel(lambda2(1,:));   %Number of job families
 K=J;   %Number of positions
 
-T=[3 5 6 4 7 6 4 5 1];   %Processing time of jobs
-FF=[10 20 15];   %Fixed cost of machines
-tau=[3 5 6];   %Variable cost of machines
+T=[3	6	5	3	4	6	3	6	4	8];   %Processing time of jobs
+FF=[9	15	10	10];   %Fixed cost of machines
+tau=[2	3	2	2];   %Variable cost of machines
 M=1000000;   %An arbitrary large number
      
 Precedency={[]
-            1
-            []
-            3
-            4
-            []
-            []
-            [2,5]
-            8};   %Precedence constraints
+[]
+2
+[]
+2
+2
+[]
+[5,4]
+[]
+[]};   %Precedence constraints
 
 Input.alpha=alpha;
 Input.lambda1=lambda1;

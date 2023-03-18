@@ -1,7 +1,7 @@
 function Input=CreateRandomModel2()
 
-I=2;
-J=8;
+I=4;
+J=25;
 
  B1=round(J/(randi([3,5],1)));   %Number of jobs belonging to batches
 % if J<=20
@@ -20,7 +20,7 @@ J=8;
 %         break;
 %     end
 % end
-B=1;   %Number of batches
+B=2;   %Number of batches
 if B==1
     b1=cell(1,1);
     b1{1}=zeros(1,B1);
