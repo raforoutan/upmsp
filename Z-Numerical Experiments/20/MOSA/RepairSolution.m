@@ -35,27 +35,51 @@ for j=1:J
 end
 
 %Repairing chromosome using NewPrecedency 
-Ynew=zeros(2,J);
-z=1;
+Ynew=[];
+np=NewPrecedency;
 while ~isempty(y)
-    for i=1:J
-        if isempty(NewPrecedency{y(1,i)})
-            Ynew(:,z)=y(:,i);
-            z=z+1;
-            y=[y(:,1:i-1) y(:,i+1:end)];
-            break;
+    for j=1:numel(y(1,:))
+        if ~isempty(np{y(1,j)})
+            continue;
         else
-            p=NewPrecedency{y(1,i)};   %Pishniyazi kar ra entekhab mikonad
-            a=intersect(Ynew(1,:),p);   %Eshteraake Pishniyazi ba takhsise jadid ra hesab mikonad 
-            if numel(p)==numel(a)   %Zamani mosavi mishavad ke hameye azaaye Pishniyazi dar takhsis bashand
-                Ynew(:,z)=y(:,i);
-                z=z+1;
-                y=[y(:,1:i-1) y(:,i+1:end)];
-                break;
-            else
-                continue;
+            Ynew=[Ynew y(:,j)];
+            for z=1:J
+               for i=1:numel(np{z}) 
+                  if np{z}(i)==y(1,j)
+                      np{z}(i)=[];
+                      break;                     
+                  end    
+               end
             end
+            y(:,j)=[];
+            break;
         end
     end
 end
+
+
+
+% Ynew=zeros(2,J);
+% z=1;
+% while ~isempty(y)
+%     for i=1:J
+%         if isempty(NewPrecedency{y(1,i)})
+%             Ynew(:,z)=y(:,i);
+%             z=z+1;
+%             y=[y(:,1:i-1) y(:,i+1:end)];
+%             break;
+%         else
+%             p=NewPrecedency{y(1,i)};   %Pishniyazi kar ra entekhab mikonad
+%             a=intersect(Ynew(1,:),p);   %Eshteraake Pishniyazi ba takhsise jadid ra hesab mikonad 
+%             if numel(p)==numel(a)   %Zamani mosavi mishavad ke hameye azaaye Pishniyazi dar takhsis bashand
+%                 Ynew(:,z)=y(:,i);
+%                 z=z+1;
+%                 y=[y(:,1:i-1) y(:,i+1:end)];
+%                 break;
+%             else
+%                 continue;
+%             end
+%         end
+%     end
+% end
 end
