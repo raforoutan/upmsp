@@ -182,6 +182,11 @@ for i=cnumrows(15)+1:cnumrows(16)
 end
 
 
+[pop, F]=NonDominatedSorting(pop);
+pop=CalcCrowdingDistance(pop,F);
+[pop, F]=SortPopulation(pop);
+
+
 cntr=0;
 for i=1:numel(pop)
     if pop(i).Rank==1
@@ -267,10 +272,21 @@ qmfourteen=qfourteen/(cnumrows(14)-cnumrows(13));
 qmfifteen=qfifteen/(cnumrows(15)-cnumrows(14));
 qmsixteen=qsixteen/(cnumrows(16)-cnumrows(15));
 
-
-
-QM.qmnsga2=qmnsga2;
-QM.qmhybrid=qmhybrid;
-QM.qmmoead=qmmoead;
+QM.qmone=qmone;
+QM.qmtwo=qmtwo;
+QM.qmthree=qmthree;
+QM.qmfour=qmfour;
+QM.qmfive=qmfive;
+QM.qmsix=qmsix;
+QM.qmseven=qmseven;
+QM.qmeight=qmeight;
+QM.qmnine=qmnine;
+QM.qmten=qmten;
+QM.qmeleven=qmeleven;
+QM.qmtwelve=qmtwelve;
+QM.qmthirteen=qmthirteen;
+QM.qmfourteen=qmfourteen;
+QM.qmfifteen=qmfifteen;
+QM.qmsixteen=qmsixteen;
 
 end
