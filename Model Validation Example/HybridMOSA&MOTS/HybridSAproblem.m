@@ -9,12 +9,12 @@ Input=CreateInput;
 CostFunction=@(x) SchedulingCost(Ynew,NewPrecedency,Input);
 %% SA parameters
 
-Maxit=70;        %maximume number of iteration
+Maxit=50;        %maximume number of iteration
 Maxsubit=25;       %maximume number of iteration
-T0=150;            % number of temp
+T0=130;            % number of temp
 alpha=0.93;
 Tabulistsize=5;
-Neighborsize=40;
+%Neighborsize=40;
 
 %% Initialization
 
