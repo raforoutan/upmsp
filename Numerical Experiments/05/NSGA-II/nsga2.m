@@ -12,14 +12,14 @@ CostFunction=@(x) SchedulingCost(Ynew,NewPrecedency,Input);
 
 %% NSGA-II Parameters
 
-MaxIt=100;      % Maximum Number of Iterations
+MaxIt=80;      % Maximum Number of Iterations
 
 nPop=50;        % Population Size
 
-pCrossover=0.7;                         % Crossover Percentage
+pCrossover=0.6;                         % Crossover Percentage
 nCrossover=2*round(pCrossover*nPop/2);  % Number of Parnets (Offsprings)
 
-pMutation=0.4;                          % Mutation Percentage
+pMutation=0.5;                          % Mutation Percentage
 nMutation=round(pMutation*nPop);        % Number of Mutants
 
 mu=0.02;                    % Mutation Rate
