@@ -1,13 +1,13 @@
-function Output = CreateOutput(F1)
+function Output = CreateOutput(EP)
 
-for j=1:numel(F1)
-    F1(j).nps=F1(j).Cost;
+for j=1:numel(EP)
+    EP(j).nps=EP(j).Cost;
 end
 
-for i=numel(F1):-1:2
+for i=numel(EP):-1:2
     for j = 1:i-1
-        if isequal(F1(i).nps,F1(j).nps)
-            F1(i).nps=[];
+        if isequal(EP(i).nps,EP(j).nps)
+            EP(i).nps=[];
             break
         end
     end
@@ -15,17 +15,17 @@ end
 % Paretolist(:).nps;
 
 h=0;
-for i=1:numel(F1)
-    if ~isempty(F1(i).nps)
+for i=1:numel(EP)
+    if ~isempty(EP(i).nps)
         h=h+1;
     end
 end
 
 Paretolist2=cell(h,1);
 z=1;
-for i=1:numel(F1)
-    if ~isempty(F1(i).nps)
-        Paretolist2{z}=[F1(i).nps];
+for i=1:numel(EP)
+    if ~isempty(EP(i).nps)
+        Paretolist2{z}=[EP(i).nps];
         z=z+1;
     end
 end
@@ -79,5 +79,6 @@ Output.DM=DM;
 Output.SNS=SNS;
 Output.RAS=RAS;
 Output.Paretolist2=Paretolist2;
+Output.EP=EP;
 
 end

@@ -14,12 +14,12 @@ nObj=3;
 
 MaxIt=100;  % Maximum Number of Iterations
 
-nPop=50;    % Population Size (Number of Sub-Problems)
+nPop=80;    % Population Size (Number of Sub-Problems)
 
-nArchive=100;
+nArchive=90;
 
 % T=max(ceil(0.2*nPop),2);    % Number of Neighbors
-T=20;
+T=40;
 
 %% Initialization
 

@@ -80,5 +80,6 @@ Output.DM=DM;
 Output.SNS=SNS;
 Output.RAS=RAS;
 Output.Paretolist2=Paretolist2;
+Output.Archive=Archive;
 
 end

@@ -46,6 +46,10 @@ for i=cnumrows(2)+1:cnumrows(3)
     pop(i).Cost=paretolist(i-cnumrows(2)).moead;
 end
 
+[pop , F]=NonDominatedSorting(pop);
+pop=CalcCrowdingDistance(pop,F);
+[pop, F]=SortPopulation(pop);
+
 cntr=0;
 for i=1:numel(pop)
     if pop(i).Rank==1
