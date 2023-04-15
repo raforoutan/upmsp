@@ -68,10 +68,19 @@ SNS=sqrt(sum(ci2)/(num-1));
 
 ci3=zeros(1,num);
 for i=1:num
-    ci3(i)=abs(((Paretolist2{i}(1))-f1best)/f1best)+abs(((Paretolist2{i}(2))-f2best)/f2best)+abs(((Paretolist2{i}(3))-f3best)/f3best);  
+    best=min(Paretolist2{i});
+    ci3(i)=abs(((Paretolist2{i}(1))-best)/best)+abs(((Paretolist2{i}(2))-best)/best)+abs(((Paretolist2{i}(3))-best)/best);  
+end
+RAS=sum(ci3)/num;
+
+
+ci4=zeros(1,num);
+for i=1:num
+    ci4(i)=abs(((Paretolist2{i}(1))-f1best)/f1best)+abs(((Paretolist2{i}(2))-f2best)/f2best)+abs(((Paretolist2{i}(3))-f3best)/f3best);  
 end
 
-RAS=sum(ci3)/num;
+RAS2=sum(ci4)/num;
+
 
 
 Output.NPS=NPS;
@@ -79,6 +88,7 @@ Output.MID=MID;
 Output.DM=DM;
 Output.SNS=SNS;
 Output.RAS=RAS;
+Output.RAS2=RAS2;
 Output.Paretolist2=Paretolist2;
 Output.Archive=Archive;
 

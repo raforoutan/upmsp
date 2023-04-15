@@ -12,14 +12,14 @@ nObj=3;
 
 %% MOEA/D Settings
 
-MaxIt=100;  % Maximum Number of Iterations
+MaxIt=150;  % Maximum Number of Iterations
 
-nPop=80;    % Population Size (Number of Sub-Problems)
+nPop=40;    % Population Size (Number of Sub-Problems)
 
-nArchive=90;
+nArchive=200;
 
 % T=max(ceil(0.2*nPop),2);    % Number of Neighbors
-T=40;
+T=20;
 
 %% Initialization
 
@@ -74,7 +74,7 @@ for it=1:MaxIt
         y=empty_individual;
         y.Position=Crossover(p1.Position,p2.Position);
         
-        y.Cost=CostFunction(y.Position);
+        y.Cost=SchedulingCost(y.Position,NewPrecedency,Input);
         
         z=min(z,y.Cost);
         
@@ -133,5 +133,7 @@ disp(['SNS = ' ...
     num2str(Output.SNS)]);
 disp(['RAS = ' ...
     num2str(Output.RAS)]);
+disp(['RAS2 = ' ...
+    num2str(Output.RAS2)]);
 
 
