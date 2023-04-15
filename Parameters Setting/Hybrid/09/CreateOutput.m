@@ -90,5 +90,6 @@ Output.SNS=SNS;
 Output.RAS=RAS;
 Output.RAS2=RAS2;
 Output.Paretolist2=Paretolist2;
+Output.Archive=Archive;
 
 end
