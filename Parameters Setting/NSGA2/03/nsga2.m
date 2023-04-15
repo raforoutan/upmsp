@@ -12,9 +12,9 @@ CostFunction=@(x) SchedulingCost(Ynew,NewPrecedency,Input);
 
 %% NSGA-II Parameters
 
-MaxIt=50;      % Maximum Number of Iterations
+MaxIt=100;      % Maximum Number of Iterations
 
-nPop=80;        % Population Size
+nPop=50;        % Population Size
 
 pCrossover=0.8;                         % Crossover Percentage
 nCrossover=2*round(pCrossover*nPop/2);  % Number of Parnets (Offsprings)
@@ -166,6 +166,8 @@ disp(['SNS = ' ...
     num2str(Output.SNS)]);
 disp(['RAS = ' ...
     num2str(Output.RAS)]);
+disp(['RAS2 = ' ...
+    num2str(Output.RAS2)]);
 
 
 

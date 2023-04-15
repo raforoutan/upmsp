@@ -82,6 +82,23 @@ function PlotCosts()
         ylabel('f_2(x)'); 
         zlabel('f_3(x)');
         grid on
+        hold on
+        
+        temp4=[Input.moead.Output.Paretolist2];
+        for i=1:numel(temp4)
+            pop(i).pesa2=temp4{i};
+        end
+        qqq1=[pop.pesa2];
+        x=qqq1(1,:);
+        y=qqq1(2,:);
+        z=qqq1(3,:);
+        %plot3(x,y,z,'or','Markersize',15, 'marker' , '^' ,'markerfacecolor','green' , 'markeredgecolor','blue');
+        plot3(x,y,z,'or','Markersize',15, 'marker' , '^' , 'markeredgecolor','black');
+        title(['Iteration =' 100]);
+        xlabel('f_1(x)');
+        ylabel('f_2(x)'); 
+        zlabel('f_3(x)');
+        grid on
         hold off
         
 end

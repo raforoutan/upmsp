@@ -74,7 +74,7 @@ for it=1:MaxIt
         y=empty_individual;
         y.Position=Crossover(p1.Position,p2.Position);
         
-        y.Cost=CostFunction(y.Position);
+        y.Cost=SchedulingCost(y.Position,NewPrecedency,Input);
         
         z=min(z,y.Cost);
         

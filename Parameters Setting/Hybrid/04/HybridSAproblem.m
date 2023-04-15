@@ -9,8 +9,8 @@ Input=CreateInput;
 CostFunction=@(x) SchedulingCost(Ynew,NewPrecedency,Input);
 %% SA parameters
 
-Maxit=50;        %maximume number of iteration
-Maxsubit=30;       %maximume number of iteration
+Maxit=100;        %maximume number of iteration
+Maxsubit=50;       %maximume number of iteration
 T0=170;            % number of temp
 alpha=0.96;
 Tabulistsize=6;
@@ -94,6 +94,8 @@ disp(['SNS = ' ...
     num2str(Output.SNS)]);
 disp(['RAS = ' ...
     num2str(Output.RAS)]);
+disp(['RAS2 = ' ...
+    num2str(Output.RAS2)]);
 
 
 

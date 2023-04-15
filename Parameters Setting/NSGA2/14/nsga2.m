@@ -12,7 +12,7 @@ CostFunction=@(x) SchedulingCost(Ynew,NewPrecedency,Input);
 
 %% NSGA-II Parameters
 
-MaxIt=120;      % Maximum Number of Iterations
+MaxIt=180;      % Maximum Number of Iterations
 
 nPop=50;        % Population Size
 
@@ -166,6 +166,8 @@ disp(['SNS = ' ...
     num2str(Output.SNS)]);
 disp(['RAS = ' ...
     num2str(Output.RAS)]);
+disp(['RAS2 = ' ...
+    num2str(Output.RAS2)]);
 
 
 
