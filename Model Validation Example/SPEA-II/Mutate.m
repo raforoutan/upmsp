@@ -1,4 +1,4 @@
-function q=Mutation(x)
+function q=Mutate(x)
 
          r=randsample(4,1);
          

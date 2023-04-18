@@ -1,14 +1,13 @@
-function Output = CreateOutput(Archive)
+function Output = CreateOutput(PF)
 
-
-for j=1:numel(Archive)
-    Archive(j).nps=Archive(j).cost;
+for j=1:numel(PF)
+    PF(j).nps=PF(j).Cost;
 end
 
-for i=numel(Archive):-1:2
+for i=numel(PF):-1:2
     for j = 1:i-1
-        if isequal(Archive(i).nps,Archive(j).nps)
-            Archive(i).nps=[];
+        if isequal(PF(i).nps,PF(j).nps)
+            PF(i).nps=[];
             break
         end
     end
@@ -16,17 +15,17 @@ end
 % Paretolist(:).nps;
 
 h=0;
-for i=1:numel(Archive)
-    if ~isempty(Archive(i).nps)
+for i=1:numel(PF)
+    if ~isempty(PF(i).nps)
         h=h+1;
     end
 end
 
 Paretolist2=cell(h,1);
 z=1;
-for i=1:numel(Archive)
-    if ~isempty(Archive(i).nps)
-        Paretolist2{z}=[Archive(i).nps];
+for i=1:numel(PF)
+    if ~isempty(PF(i).nps)
+        Paretolist2{z}=[PF(i).nps];
         z=z+1;
     end
 end
@@ -68,10 +67,18 @@ SNS=sqrt(sum(ci2)/(num-1));
 
 ci3=zeros(1,num);
 for i=1:num
-    ci3(i)=abs(((Paretolist2{i}(1))-f1best)/f1best)+abs(((Paretolist2{i}(2))-f2best)/f2best)+abs(((Paretolist2{i}(3))-f3best)/f3best);  
+    best=min(Paretolist2{i});
+    ci3(i)=abs(((Paretolist2{i}(1))-best)/best)+abs(((Paretolist2{i}(2))-best)/best)+abs(((Paretolist2{i}(3))-best)/best);  
+end
+RAS=sum(ci3)/num;
+
+
+ci4=zeros(1,num);
+for i=1:num
+    ci4(i)=abs(((Paretolist2{i}(1))-f1best)/f1best)+abs(((Paretolist2{i}(2))-f2best)/f2best)+abs(((Paretolist2{i}(3))-f3best)/f3best);  
 end
 
-RAS=sum(ci3)/num;
+RAS2=sum(ci4)/num;
 
 
 Output.NPS=NPS;
@@ -79,6 +86,8 @@ Output.MID=MID;
 Output.DM=DM;
 Output.SNS=SNS;
 Output.RAS=RAS;
+Output.RAS2=RAS2;
 Output.Paretolist2=Paretolist2;
+Output.PFC=PF;
 
 end
