@@ -14,7 +14,7 @@ CostFunction=@(x) SchedulingCost(Ynew,NewPrecedency,Input);
 
 MaxIt=120;        % Maximum Number of Iterations
 
-nPop=30;            % Population Size
+nPop=50;            % Population Size
 
 nArchive=250;        % Archive Size
 
