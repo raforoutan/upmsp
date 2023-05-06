@@ -9,30 +9,25 @@ Input=CreateInput;
 [Ynew , NewPrecedency]=RepairSolution(RandomSolution(Input),Input);
 CostFunction=@(x) SchedulingCost(Ynew,NewPrecedency,Input);
 
-
 %% SPEA2 Settings
 
-MaxIt=120;        % Maximum Number of Iterations
+MaxIt=100;        % Maximum Number of Iterations
 
 nPop=50;            % Population Size
 
-nArchive=250;        % Archive Size
+nArchive=150;        % Archive Size
 
 K=round(sqrt(nPop+nArchive));  % KNN Parameter
 
-pCrossover=0.8;
+pCrossover=0.9;
 nCrossover=round(pCrossover*nPop/2)*2;
 
-pMutation=0.2;
+pMutation=0.5;
 nMutation=nPop-nCrossover;
 
-crossover_params.gamma=0.1;
-% crossover_params.VarMin=VarMin;
-% crossover_params.VarMax=VarMax;
-
-mutation_params.h=0.2;
-% mutation_params.VarMin=VarMin;
-% mutation_params.VarMax=VarMax;
+Maxit=5;        %maximume number of iteration
+Neighborsize=3;
+Tabulistsize=2;
 
 %% Initialization
 
@@ -49,7 +44,10 @@ empty_individual.Rank=[];
 empty_individual.DominationSet=[];
 empty_individual.DominatedCount=[];
 empty_individual.CrowdingDistance=[];
-
+% 
+% Tabulist=[];
+% Candidatelist=[];
+% Paretolist=[];
 
 pop=repmat(empty_individual,nPop,1);
 for i=1:nPop
@@ -62,13 +60,13 @@ for i=1:nPop
 end
 
 archive=[];
-[pop, F]=NonDominatedSorting(pop);
-
-% Calculate Crowding Distance
-pop=CalcCrowdingDistance(pop,F);
-
-% Sort Population
-[pop, F]=SortPopulation(pop);
+% [pop, F]=NonDominatedSorting(pop);
+% 
+% % Calculate Crowding Distance
+% pop=CalcCrowdingDistance(pop,F);
+% 
+% % Sort Population
+% [pop, F]=SortPopulation(pop);
 %% Main Loop
 
 for it=1:MaxIt
@@ -201,6 +199,91 @@ for it=1:MaxIt
     % Truncate
     pop=pop(1:nPop);
     
+    
+    
+    
+    for i=1:numel(pop)
+        
+        Tabulist=[];
+        Candidatelist=[];
+        Paretolist=[];
+        
+        X.position=pop(i).Position;
+        X.Z=pop(i).Cost;
+        
+        Tabulist=[Tabulist X];
+        Paretolist=[Paretolist
+                X];
+        for it=1:Maxit
+    
+            % Neighbourhood Generation
+
+            pop2=CreateNeighbor(X,Input,Tabulist,Neighborsize,NewPrecedency);
+
+
+            % Identify Candidate Solutions
+
+            [newCandidatelist,Updatelist]=CandidateSolutions(pop2,Paretolist,Candidatelist);
+            Paretolist=Updatelist.P;
+            Candidatelist=Updatelist.C;
+            % Selection of new seed solution
+            n=numel(newCandidatelist);
+            if n==0
+                  if numel(Candidatelist)==0
+                      break;
+                  end        
+                Xnew=Candidatelist(1);
+
+            % Update Pareto list
+                Paretolist=[Paretolist
+                                Xnew];  %#ok
+
+             % Update taboo list   
+                if numel(Tabulist)==Tabulistsize
+                   Tabulist(end)=[]; 
+                   Tabulist=[Xnew Tabulist];    %#ok
+                else
+                   Tabulist=[Xnew Tabulist];        %#ok
+                end
+             % Update candidate list
+                Candidatelist=Candidatelist(2:end);
+
+            else
+
+                t=randi(n);
+                Xnew=newCandidatelist(t);
+             % Update Pareto list
+                Paretolist=[Paretolist
+                                Xnew]; %#ok
+                % Update taboo
+                if numel(Tabulist)==Tabulistsize
+                   Tabulist(end)=[]; 
+                   Tabulist=[Xnew Tabulist];        %#ok
+                else
+                   Tabulist=[Xnew Tabulist];        %#ok
+                end
+               % Update candidate list
+               Candidatelist=[Candidatelist
+                              newCandidatelist];    %#ok
+                  if numel(Candidatelist)==0
+                      break;
+                  end
+            end
+            X=Xnew;
+        end 
+        cntr=randi(numel(Paretolist));
+        X.position=Paretolist(cntr).position;
+        X.Z=Paretolist(cntr).Z;
+        
+        
+        tmp=Nondominate(X.Z,pop(i).Cost);
+        
+        if tmp
+            pop(i).Position=X.position;
+            pop(i).Cost=X.Z;
+        end
+    end
+    
     % Non-Dominated Sorting
     [pop, F]=NonDominatedSorting(pop);
 
@@ -212,6 +295,7 @@ for it=1:MaxIt
     
     % Store F1
     F1=pop(F{1});
+    
 end
 time=toc;
 
