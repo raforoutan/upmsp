@@ -19,7 +19,7 @@ function PlotCosts()
         temp0{1}=[23;1.001666666666667e+02;1.808333333333333e+02];
         temp0{2}=[20.833333333333336;1.130000000000000e+02;1.325000000000000e+02];
         temp0{3}=[20.500000000000000;106;1.615000000000000e+02];
-        %temp0{4}=[24.3334;13.6667;132.5000];
+        temp0{4}=[24.3334;13.6667;132.5000];
 
        
      
@@ -31,7 +31,7 @@ function PlotCosts()
         y=q1(2,:);
         z=q1(3,:);
         %plot3(x,y,z,'or','Markersize',15, 'marker' , '*' ,'markerfacecolor','green' , 'markeredgecolor','green');
-        plot3(x,y,z,'or','Markersize',25, 'marker' , 's' , 'markeredgecolor','#EDB120');
+        plot3(x,y,z,'or','Markersize',20, 'marker' , 's' , 'markeredgecolor','r');
         title(['Iteration =' 100]);
         xlabel('f_1(x)');
         ylabel('f_2(x)'); 
@@ -83,7 +83,7 @@ function PlotCosts()
         y=qqq1(2,:);
         z=qqq1(3,:);
         %plot3(x,y,z,'or','Markersize',15, 'marker' , '^' ,'markerfacecolor','green' , 'markeredgecolor','blue');
-        plot3(x,y,z,'or','Markersize',15, 'marker' , 'diamond' , 'markeredgecolor','#D95319');
+        plot3(x,y,z,'or','Markersize',15, 'marker' , 'diamond' , 'markeredgecolor','#FF00FF');
         title(['Iteration =' 100]);
         xlabel('f_1(x)');
         ylabel('f_2(x)'); 
