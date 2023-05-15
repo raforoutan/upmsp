@@ -1,0 +1,7 @@
+Costs=zeros(numel(Output.Paretolist2),3);
+for i=1:numel(Output.Paretolist2)
+    for j=1:3
+        Costs(i,j)=Output.Paretolist2{i}(j);
+    end
+end
+
